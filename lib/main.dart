@@ -1,5 +1,7 @@
 import "package:flutter/material.dart";
 
+import "./transaction.dart";
+
 void main() => runApp(MyApp());
 
 
@@ -28,6 +30,11 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
+  final List<Transaction> transactions = [
+    Transaction(id: 'tx1', title: 'rasp pi', amt: 5000, date: DateTime.now()),
+    Transaction(id: 'tx2', title: 'servo', amt: 200, date: DateTime.now()),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,13 +50,29 @@ class _MyHomePageState extends State<MyHomePage> {
               width: double.infinity,
               child: Text('Chart'),
             ),
+
             Column(
-              children: <Widget>[
-                Text('Transaction1'),
-                Text('Transaction2'),
-              ],
+              children: transactions.map((tx) {
+                return Card(
+                  child: Row(
+                    children: <Widget>[
+                      Container(
+                        child: Text(tx.amt.toString()),
+                      ),
+                      Column(
+                        children: <Widget>[
+                          Text(tx.title),
+                          Text(tx.date.toString())
+                        ],
+                      ),
+                    ],
+                  ),
+                );
+              }).toList(),
+
             )
-        ]),
+          ],
+        )
       ),
     );
   }
