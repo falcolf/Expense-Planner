@@ -1,5 +1,4 @@
 import "package:flutter/material.dart";
-
 import "./transaction.dart";
 
 void main() => runApp(MyApp());
@@ -57,7 +56,23 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Row(
                     children: <Widget>[
                       Container(
-                        child: Text(tx.amt.toString()),
+                        margin: EdgeInsets.symmetric(
+                          vertical: 10,
+                          horizontal: 15,
+                        ),
+                        padding: EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.black,
+                              width: 2,
+                            )
+                        ),
+                        child: Text(
+                          tx.amt.toString(),
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
                       Column(
                         children: <Widget>[
