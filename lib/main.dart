@@ -30,6 +30,17 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
+  String input_title;
+  String input_amt;
+
+  void addTransaction(){
+    setState(() {
+      transactions.add(
+        Transaction(id:'tx3', title:this.input_title, amt: double.parse(this.input_amt), date: DateTime.now())
+      );
+    });
+  }
+
   final List<Transaction> transactions = [
     Transaction(id: 'tx1', title: 'rasp pi', amt: 5000, date: DateTime.now()),
     Transaction(id: 'tx2', title: 'servo', amt: 200, date: DateTime.now()),
@@ -58,13 +69,19 @@ class _MyHomePageState extends State<MyHomePage> {
                   children: <Widget>[
                     TextField(
                       decoration: InputDecoration(labelText: 'Title'),
+                      onChanged: (val){
+                        this.input_title = val;
+                      },
                     ),
                     TextField(
                       decoration: InputDecoration(labelText: 'Amount'),
+                      onChanged: (val) {
+                        this.input_amt = val;
+                      },
                     ),
                     FlatButton(
                       child: Text('Add Transaction'),
-                      onPressed: null,
+                      onPressed: addTransaction,
                     )
                   ],
                 )
