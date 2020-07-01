@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:intl/intl.dart";
 import "./transaction.dart";
 
 void main() => runApp(MyApp());
@@ -65,23 +66,27 @@ class _MyHomePageState extends State<MyHomePage> {
                             border: Border.all(
                               color: Colors.black,
                               width: 2,
-                            )
+                            ),
                         ),
+                        width: 120,
                         child: Text(
-                          tx.amt.toString(),
+                          'Rs. ${tx.amt}/-',
+                          textAlign: TextAlign.right,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
                       Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(tx.title),
-                          Text(tx.date.toString())
+                          Text(tx.title, style: TextStyle(fontSize: 18)),
+                          Text(DateFormat.yMMMd().format(tx.date), style: TextStyle(fontSize: 12, color: Colors.blueGrey))
                         ],
                       ),
                     ],
                   ),
+                  elevation: 5,
                 );
               }).toList(),
 
