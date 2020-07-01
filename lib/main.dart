@@ -43,14 +43,33 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          //mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             Container(
               color: Colors.blue,
               width: double.infinity,
+              padding: EdgeInsets.all(10),
               child: Text('Chart'),
             ),
-
+            Card(
+              child: Container(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: <Widget>[
+                    TextField(
+                      decoration: InputDecoration(labelText: 'Title'),
+                    ),
+                    TextField(
+                      decoration: InputDecoration(labelText: 'Amount'),
+                    ),
+                    FlatButton(
+                      child: Text('Add Transaction'),
+                      onPressed: null,
+                    )
+                  ],
+                )
+              ),
+            ),
             Column(
               children: transactions.map((tx) {
                 return Card(
