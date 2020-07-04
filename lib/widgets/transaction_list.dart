@@ -8,8 +8,14 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 300,
-      child: ListView.builder(
+      height: 400,
+      child: this.transactions.isEmpty ? Column(
+        children: <Widget>[
+          Container(child: Image.asset('assets/images/waiting.png', fit: BoxFit.cover,), height: 150, padding: EdgeInsets.all(20),),
+          SizedBox(height: 10,),
+          Text('No transactions to show!', style: Theme.of(context).textTheme.headline6,),
+        ],
+      ) : ListView.builder(
         itemCount: transactions.length,
         itemBuilder: (ctx, index){
           return Card(
