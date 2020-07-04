@@ -37,7 +37,7 @@ class _NewTransactionState extends State<NewTransaction> {
                 decoration: InputDecoration(labelText: 'Title'),
                 controller: this.titleController,
                 onSubmitted: (_) => submitTxn(),
-                //autofocus: true,
+                autofocus: true,
               ),
               TextField(
                 decoration: InputDecoration(labelText: 'Amount'),
