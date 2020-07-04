@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Expense Planner',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.blueGrey,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: MyHomePage('Expense Planner'),
@@ -39,17 +39,23 @@ class _MyHomePageState extends State<MyHomePage> {
   void _addTransaction(String title, double amt){
     setState(() {
       this._userTransactions.add(
-          Transaction(
-              id:DateTime.now().toString(),
-              title: title,
-              amt: amt,
-              date: DateTime.now()
-          )
-      );
-    });
+        Transaction(
+            id:DateTime.now().toString(),
+            title: title,
+            amt: amt,
+            date: DateTime.now()
+        )
+    );
+  });
   }
   void newTransaction(BuildContext ctx){
-    showModalBottomSheet(context: ctx, builder: (_)=> NewTransaction(this._addTransaction));
+    showModalBottomSheet(context: ctx, builder: (_){
+      return GestureDetector(
+        onTap: () {},
+        child: NewTransaction(this._addTransaction),
+        behavior: HitTestBehavior.opaque,
+      );
+    });
   }
 
   @override
@@ -78,6 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
           onPressed: () => newTransaction(context),
           child: Icon(Icons.add),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
