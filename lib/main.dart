@@ -1,5 +1,7 @@
 import "package:flutter/material.dart";
-import "widgets/user_transactions.dart";
+import "widgets/new_transaction.dart";
+import "widgets/transaction_list.dart";
+import "models/transaction.dart";
 
 void main() => runApp(MyApp());
 
@@ -18,17 +20,46 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
 
   final String title;
-
   MyHomePage(this.title);
+
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+
+  final List<Transaction> _userTransactions = [
+    Transaction(id: 'tx1', title: 'rasp pi', amt: 5000, date: DateTime.now()),
+    Transaction(id: 'tx2', title: 'servo', amt: 200, date: DateTime.now()),
+  ];
+
+  void _addTransaction(String title, double amt){
+    setState(() {
+      this._userTransactions.add(
+          Transaction(
+              id:DateTime.now().toString(),
+              title: title,
+              amt: amt,
+              date: DateTime.now()
+          )
+      );
+    });
+  }
+  void newTransaction(BuildContext ctx){
+    showModalBottomSheet(context: ctx, builder: (_)=> NewTransaction(this._addTransaction));
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(this.title),
+        title: Text(this.widget.title),
+        actions: <Widget>[
+          IconButton(onPressed: () => newTransaction(context), icon: Icon(Icons.add),)
+        ],
       ),
       body: Center(
           child: Column(
@@ -39,9 +70,13 @@ class MyHomePage extends StatelessWidget {
                 padding: EdgeInsets.all(10),
                 child: Text('Chart'),
               ),
-              UserTransactions(),
+              TransactionList(this._userTransactions),
             ],
           )
+      ),
+      floatingActionButton: FloatingActionButton(
+          onPressed: () => newTransaction(context),
+          child: Icon(Icons.add),
       ),
     );
   }
