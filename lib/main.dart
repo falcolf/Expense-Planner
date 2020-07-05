@@ -90,24 +90,29 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final appBar = AppBar(
+      title: Text(widget.title),
+      actions: <Widget>[
+        IconButton(onPressed: () => newTransaction(context), icon: Icon(Icons.add),)
+      ],
+    );
     return Scaffold(
-      appBar: AppBar(
-        title: Text(this.widget.title),
-        actions: <Widget>[
-          IconButton(onPressed: () => newTransaction(context), icon: Icon(Icons.add),)
-        ],
-      ),
+      appBar: appBar,
       body: SingleChildScrollView(
         child: Center(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 Container(
+                  height: (MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top - appBar.preferredSize.height) * 0.3,
                   width: double.infinity,
                   padding: EdgeInsets.all(10),
                   child: Chart(_recentTransactions),
                 ),
-                TransactionList(this._userTransactions, this._deleteTransaction),
+                Container(
+                    height: (MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top - appBar.preferredSize.height) * 0.7,
+                    child: TransactionList(this._userTransactions, this._deleteTransaction)
+                ),
               ],
             )
         ),
