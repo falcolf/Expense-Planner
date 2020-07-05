@@ -28,8 +28,9 @@ class MyApp extends StatelessWidget {
             fontSize: 15,
             fontFamily: 'OpenSans',
             fontWeight: FontWeight.bold,
-          )
-        )
+          ),
+          button: TextStyle(color: Colors.white)
+        ),
       ),
       home: MyHomePage('Expense Planner'),
     );
@@ -48,18 +49,18 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
 
   final List<Transaction> _userTransactions = [
-    Transaction(id: 'tx1', title: 'rasp pi', amt: 500, date: DateTime.now().subtract(Duration(days: 1))),
-    Transaction(id: 'tx2', title: 'servo', amt: 200, date: DateTime.now().subtract(Duration(days: 4))),
+    //Transaction(id: 'tx1', title: 'rasp pi', amt: 500, date: DateTime.now().subtract(Duration(days: 1))),
+    //Transaction(id: 'tx2', title: 'servo', amt: 200, date: DateTime.now().subtract(Duration(days: 4))),
   ];
 
-  void _addTransaction(String title, double amt){
+  void _addTransaction(String title, double amt, DateTime date){
     setState(() {
       this._userTransactions.add(
         Transaction(
             id:DateTime.now().toString(),
             title: title,
             amt: amt,
-            date: DateTime.now()
+            date: date,
         )
       );
     });
