@@ -66,6 +66,12 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void _deleteTransaction(String id){
+    setState(() {
+      _userTransactions.removeWhere((tx) => tx.id == id);
+    });
+  }
+
   void newTransaction(BuildContext ctx){
     showModalBottomSheet(context: ctx, builder: (_){
       return GestureDetector(
@@ -99,7 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 padding: EdgeInsets.all(10),
                 child: Chart(_recentTransactions),
               ),
-              TransactionList(this._userTransactions),
+              TransactionList(this._userTransactions, this._deleteTransaction),
             ],
           )
       ),
