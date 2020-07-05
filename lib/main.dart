@@ -97,17 +97,20 @@ class _MyHomePageState extends State<MyHomePage> {
           IconButton(onPressed: () => newTransaction(context), icon: Icon(Icons.add),)
         ],
       ),
-      body: Center(
-          child: Column(
-            children: <Widget>[
-              Container(
-                width: double.infinity,
-                padding: EdgeInsets.all(10),
-                child: Chart(_recentTransactions),
-              ),
-              TransactionList(this._userTransactions, this._deleteTransaction),
-            ],
-          )
+      body: SingleChildScrollView(
+        child: Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.all(10),
+                  child: Chart(_recentTransactions),
+                ),
+                TransactionList(this._userTransactions, this._deleteTransaction),
+              ],
+            )
+        ),
       ),
       floatingActionButton: FloatingActionButton(
           onPressed: () => newTransaction(context),
